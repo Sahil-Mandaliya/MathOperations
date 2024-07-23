@@ -7,6 +7,11 @@ from opcode_executor.model.register import Register
 from opcode_executor.service.instructions import InstructionSimulator
 
 class OpcodeSimulator(ABC):
+    @abstractmethod
+    def execute(self, instructions: List[str]) -> RegisterState:
+        pass
+
+class OperationsSimulator(OpcodeSimulator):
     def __init__(self) -> None:
         self.register_names = ["A","B","C","D"]
         self.registers = []
@@ -15,17 +20,9 @@ class OpcodeSimulator(ABC):
 
         super().__init__()
 
-    @abstractmethod
     def execute(self, instructions: List[str]) -> RegisterState:
-        pass
-
-class OperationsSimulator(OpcodeSimulator):
-    def execute(self, instructions: List[str]) -> RegisterState:
+        current_state = RegisterState(self.registers)
         for instruction in instructions:
-            InstructionSimulator.execute(instruction)
+            InstructionSimulator(instruction, current_state).execute()
         
-        return self.registers
-
-
-opcode_simulator = OpcodeSimulator()
-print(opcode_simulator.register_names)
+        return current_state

@@ -1,12 +1,12 @@
 import unittest
 
-from opcode_executor.service.opcode_simulator import OpcodeSimulator
+from opcode_executor.service.opcode_simulator import OperationsSimulator
 
 
 class OpCodeSimulatorTest(unittest.TestCase):
     def setUp(self) -> None:
         # TODO initiate the class
-        self.opcode_simulator = OpcodeSimulator()
+        self.opcode_simulator = OperationsSimulator()
 
     def test_set_instructions(self):
         instructions = ["RST", "SET A 1", "SET B -2", "SET C 3", "SET D 4"]
