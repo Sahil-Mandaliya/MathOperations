@@ -19,3 +19,17 @@ class RegisterState:
 
     def reset(self):
         self.__registers__ = {name: Register(name) for name, register in self.__registers__.items()}
+
+class CurrentRegisters:
+    def __init__(self) -> None:
+        self.register_names = ["A","B","C","D"]
+        self.registers = []
+
+    def init_registers(self) -> None:
+        self.registers = []
+        for register_name in self.register_names:
+             self.registers.append(Register(register_name))
+
+    def get_current_registers(self):
+        return self.registers
+    
